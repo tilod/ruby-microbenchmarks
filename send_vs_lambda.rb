@@ -14,17 +14,31 @@ class UselessClass
   define_method 'useless_generated_method' do |random|
     random * 2
   end
+
+  def method_missing(method, *args, &block)
+    if method == :useless_missing_method
+      args[0] * 2
+    else
+      super
+    end
+  end
 end
 useless_instance = UselessClass.new
 
 Benchmark.bm(40) do |bm|
-  puts 'send vs. lambda'
-  puts '---------------'
+  puts 'send vs. lambda vs. method_missing'
+  puts '----------------------------------'
   puts
 
-  bm.report '    direct method call:' do
+  bm.report '    direct method call (def):' do
     random_ary.size.times do |i|
       useless_instance.useless_method(random_ary[i])
+    end
+  end
+
+  bm.report '    direct method call (define_method):' do
+    random_ary.size.times do |i|
+      useless_instance.useless_generated_method(random_ary[i])
     end
   end
 
@@ -43,6 +57,12 @@ Benchmark.bm(40) do |bm|
   bm.report '    lambda:' do
     random_ary.size.times do |i|
       useless_instance.useless_lambda.call(random_ary[i])
+    end
+  end
+
+  bm.report '    method_missing:' do
+    random_ary.size.times do |i|
+      useless_instance.useless_missing_method(random_ary[i])
     end
   end
 end

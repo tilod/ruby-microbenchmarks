@@ -65,10 +65,12 @@ jit cleverness (simple function call)
 
 
                                                user     system      total        real
-send vs. lambda
----------------
+send vs. lambda vs. method_missing
+----------------------------------
 
-    direct method call:                    1.550000   0.090000   1.640000 (  1.646076)
-    send (def):                            4.640000   0.000000   4.640000 (  4.656347)
-    send (define_method):                  5.180000   0.000000   5.180000 (  5.190553)
-    lambda:                                2.610000   0.000000   2.610000 (  2.616750)
+    direct method call (def):              1.550000   0.090000   1.640000 (  1.653343)
+    direct method call (define_method):    2.120000   0.010000   2.130000 (  2.126061)
+    send (def):                            4.790000   0.000000   4.790000 (  4.800868)
+    send (define_method):                  5.190000   0.000000   5.190000 (  5.193758)
+    lambda:                                2.590000   0.000000   2.590000 (  2.603742)
+    method_missing:                        3.970000   0.000000   3.970000 (  3.974836)
