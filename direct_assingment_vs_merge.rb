@@ -106,4 +106,6 @@ Benchmark.bm(40) do |bm|
     end
   end
 
+  puts "\n\n"
+
 end
