@@ -1,3 +1,7 @@
+JRuby 1.7.1 (HotSpot 1.7.0_09) -- AMD Phenom X6 1090T (@3.2 GHz, @3.6 GHz TurboCore)
+====================================================================================
+
+
                                                user     system      total        real
 array include vs. boolean or
 ----------------------------
