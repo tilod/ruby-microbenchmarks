@@ -1,6 +1,6 @@
 require 'benchmark'
 
-random_ary = (1..1_000_000).map { rand(1..100) }
+random_ary = (1..1_000_000).map { rand(100) }
 
 Benchmark.bm(40) do |bm|
   puts 'array include vs. boolean or'

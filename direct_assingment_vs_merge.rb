@@ -1,10 +1,10 @@
 require 'benchmark'
 
-random_ary = (1..1000).map { rand(1..100) }
+random_ary = (1..1000).map { rand(100) }
 
 @offset = 0
 def useless_hash(entries)
-  hash = Hash[(@offset..@offset + entries).map { |i| [i, rand(1..100)] }]
+  hash = Hash[(@offset..@offset + entries).map { |i| [i, rand(100)] }]
   @offset += entries
 
   hash

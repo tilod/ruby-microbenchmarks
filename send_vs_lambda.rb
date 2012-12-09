@@ -4,7 +4,7 @@ random_ary = (1..10_000_000).map { rand }
 class UselessClass
   attr_reader :useless_lambda
   def initialize
-    @useless_lambda = ->(random) { random * 2 }
+    @useless_lambda = lambda { |random| random * 2 }
   end
 
   def useless_method(random)
