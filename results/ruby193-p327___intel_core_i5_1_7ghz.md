@@ -58,9 +58,10 @@ iterative vs. map-reduce
 send vs. lambda vs. method_missing
 ----------------------------------
 
-    direct method call (def):              2.420000   0.010000   2.430000 (  2.425864)
-    direct method call (define_method):    3.010000   0.000000   3.010000 (  3.012556)
-    send (def):                            5.080000   0.000000   5.080000 (  5.083660)
-    send (define_method):                  6.000000   0.000000   6.000000 (  5.994515)
-    lambda:                                3.490000   0.000000   3.490000 (  3.490920)
-    method_missing:                        5.140000   0.010000   5.150000 (  5.141302)
+    direct method call (def):              2.440000   0.000000   2.440000 (  2.447894)
+    direct method call (define_method):    2.940000   0.000000   2.940000 (  2.940372)
+    send (def):                            5.080000   0.000000   5.080000 (  5.071818)
+    send (define_method):                  5.500000   0.000000   5.500000 (  5.508700)
+    lambda:                                3.750000   0.010000   3.760000 (  3.750172)
+    method_missing:                        5.420000   0.000000   5.420000 (  5.428137)
+    instance_exec:                         5.210000   0.000000   5.210000 (  5.204614)

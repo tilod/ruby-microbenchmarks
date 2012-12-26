@@ -22,6 +22,10 @@ class UselessClass
       super
     end
   end
+
+  def useless_instance_exec(random)
+    instance_exec random, &@useless_lambda
+  end
 end
 useless_instance = UselessClass.new
 
@@ -70,10 +74,19 @@ Benchmark.bm(40) do |bm|
     end
   end
 
+
   bm.report '    method_missing:' do
     10000.times do
       random_ary.size.times do |i|
         useless_instance.useless_missing_method(random_ary[i])
+      end
+    end
+  end
+
+  bm.report '    instance_exec:' do
+    10000.times do
+      random_ary.size.times do |i|
+        useless_instance.useless_instance_exec(random_ary[i])
       end
     end
   end
