@@ -66,7 +66,7 @@ Benchmark.bm(40) do |bm|
     end
   end
 
-  bm.report '    send (define_method, called with string):' do
+  bm.report '    send (define_method, string):' do
     10000.times do
       random_ary.size.times do |i|
         useless_instance.send('useless_generated_method', random_ary[i])
@@ -74,7 +74,7 @@ Benchmark.bm(40) do |bm|
     end
   end
 
-  bm.report '    send (define_method, called with symbol):' do
+  bm.report '    send (define_method, symbol):' do
     10000.times do
       random_ary.size.times do |i|
         useless_instance.send(:useless_generated_method, random_ary[i])
