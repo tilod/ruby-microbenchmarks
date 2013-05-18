@@ -5,7 +5,7 @@ Benchmark.bm(40) do |bm|
   puts '-----------------------------'
   puts
 
-  bm.report '    concat:' do
+  bm.report '    concat with "+":' do
     1000000.times do
       string = 'first'  + (1 + 1).to_s +
                'second' + (2 + 2).to_s +
@@ -15,7 +15,7 @@ Benchmark.bm(40) do |bm|
     end
   end
 
-  bm.report '    append:' do
+  bm.report '    append with "<<":' do
     1000000.times do
       string  = 'first'
       string << 1 + 1
@@ -27,6 +27,21 @@ Benchmark.bm(40) do |bm|
       string << 4 + 4
       string << 'fifth'  
       string << 5 + 5
+    end
+  end
+
+  bm.report '    append with "+=":' do
+    1000000.times do
+      string  = 'first'
+      string += (1 + 1).to_s
+      string += 'second' 
+      string += (2 + 2).to_s
+      string += 'third'  
+      string += (3 + 3).to_s
+      string += 'fourth' 
+      string += (4 + 4).to_s
+      string += 'fifth'  
+      string += (5 + 5).to_s
     end
   end
 
