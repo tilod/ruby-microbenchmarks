@@ -5,6 +5,10 @@ class Base
   def do_something
     2 + 3
   end
+
+  def call_do_something
+    do_something
+  end
 end
 
 
@@ -31,6 +35,12 @@ Benchmark.bm(40) do |bm|
   puts 'facade pattern vs. module'
   puts '-----------------------------'
   puts
+
+  bm.report '    direct call:' do
+    1_000_000.times do
+      Base.new.call_do_something
+    end
+  end
 
   bm.report '    facade ("classic" OO):' do
     1_000_000.times do
