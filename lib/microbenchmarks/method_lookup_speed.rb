@@ -88,9 +88,6 @@ deep_10:
     end
 
 
-
-
-
   private
 
     def call_methods(instance)
