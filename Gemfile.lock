@@ -2,12 +2,21 @@ PATH
   remote: .
   specs:
     microbenchmarks (0.0.1)
+      benchmark-ips
+      pry
 
 GEM
   remote: https://rubygems.org/
   specs:
-    minitest (5.0.6)
+    benchmark-ips (1.2.0)
+    coderay (1.0.9)
+    method_source (0.8.1)
+    pry (0.9.12.2)
+      coderay (~> 1.0.5)
+      method_source (~> 0.8)
+      slop (~> 3.4)
     rake (10.1.0)
+    slop (3.4.5)
 
 PLATFORMS
   ruby
@@ -15,5 +24,4 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.3)
   microbenchmarks!
-  minitest
   rake
