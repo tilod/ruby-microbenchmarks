@@ -1,28 +1,27 @@
 require 'microbenchmarks'
 
 module Microbenchmarks
-  class MethodLookupSpeed < Microbenchmark
-    description \
-%q{Speed of the method lookup in Ruby for deep ancestor trees.
+  class MethodLookupSpeed < Base
+    short_desc 'Speed of the method lookup in Ruby for deep ancestor trees'
 
-one_class:
-  Define all 1000 methods in one class and call five of them.
+    long_desc '
+      one_class:
+        Define all 1000 methods in one class and call five of them.
 
-deep_10:
-  Define 10 modules with 100 methods each and include them in the class. Call
-  five methods, equally distributed in the depth of the ancestor tree.
+      deep_10:
+        Define 10 modules with 100 methods each and include them in the class.
+        Call five methods, equally distributed in the depth of the ancestor tree.
 
-deep_100:
-  Define 100 modules with 10 methods each and include them in the class. Call
-  five methods, equally distributed in the depth of the ancestor tree.
+      deep_100:
+        Define 100 modules with 10 methods each and include them in the class.
+        Call five methods, equally distributed in the depth of the ancestor tree.
 
-deep_10:
-  Define 1000 modules with one method each and include them in the class. Call
-  five methods, equally distributed in the depth of the ancestor tree.
+      deep_1000:
+        Define 1000 modules with one method each and include them in the class.
+        Call five methods, equally distributed in the depth of the ancestor tree.
+    '
 
-}
 
-    
     class OneClass
       0.upto 999 do |i|
         define_method "method_#{i}" do
@@ -83,12 +82,13 @@ deep_10:
       call_methods(Deep100.new)
     end
 
+    
     def deep_1000
       call_methods(Deep1000.new)
     end
 
 
-  private
+    private
 
     def call_methods(instance)
       instance.method_0

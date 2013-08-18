@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'microbenchmarks/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "microbenchmarks"
+  spec.name          = "ruby-microbenchmarks"
   spec.version       = Microbenchmarks::VERSION
   spec.authors       = ["Tilo Dietrich"]
   spec.email         = ["tandrokor@gmail.com"]
@@ -22,5 +22,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
 
   spec.add_dependency 'benchmark-ips'
-  spec.add_dependency 'pry'
+  spec.add_dependency 'gli'
+  spec.add_dependency 'activesupport',       '~> 4'
 end
