@@ -1,12 +1,15 @@
 require 'benchmark/ips'
 
 
-puts %q[
-facade pattern vs. module
+puts %{
+Facade Pattern vs. Module
 =========================
 
+Call methods in classes composed by using the facade/decorator pattern,
+module mixins (Concerns) or DCI.
+
 direct call:
-  Call method directly. It can't be faster then this.
+  Call method directly. It can't be faster than this.
 
 call from method:
   Call method from other method in same class.
@@ -24,7 +27,7 @@ dci:
   method from the mixed in method in module.
 
 
-]
+}
 
 
 module DirectCall
