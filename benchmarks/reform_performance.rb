@@ -36,10 +36,10 @@ class Project
 
   attr_accessor :name, :owner, :status, :members
 
-  validate :name,    presence: true
-  validate :owner,   presence: true
-  validate :status,  presence: true, inclusion: { in: %w(start working end) }
-  validate :members, presence: true, numericality: true
+  validates :name,    presence: true
+  validates :owner,   presence: true
+  validates :status,  presence: true, inclusion: { in: %w(start working end) }
+  validates :members, presence: true, numericality: true
 end
 
 
@@ -51,10 +51,10 @@ class ProjectForm < Reform::Form
   property :status
   property :members
 
-  validate :name,    presence: true
-  validate :owner,   presence: true
-  validate :status,  presence: true, inclusion: { in: %w(start working end) }
-  validate :members, presence: true, numericality: true
+  validates :name,    presence: true
+  validates :owner,   presence: true
+  validates :status,  presence: true, inclusion: { in: %w(start working end) }
+  validates :members, presence: true, numericality: true
 end
 
 
