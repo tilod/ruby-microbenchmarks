@@ -4,13 +4,13 @@ ExceptionToRescue = Class.new(StandardError)
 
 Benchmark.ips do |bm|
   bm.report 'with `if`' do
-    (1..100).each do |number|
+    1.upto(100) do |number|
       check_condition =
-        if number.odd?
-          :odd
-        else
-          :even
-        end
+          if number.odd?
+            :odd
+          else
+            :even
+          end
 
       if check_condition == :odd
         1 + 1
@@ -21,7 +21,7 @@ Benchmark.ips do |bm|
   end
 
   bm.report 'with exception' do
-    (1..100).each do |number|
+    1.upto(100) do |number|
       begin
         raise ExceptionToRescue if number.odd?
         2 + 2
