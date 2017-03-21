@@ -3,11 +3,11 @@ require 'delegate'
 require 'forwardable'
 require 'active_support/core_ext/module/delegation'
 
-puts %{
-Delegation
-==========
+puts <<-DOC
 
-}
+DELEGATION
+
+DOC
 
 
 class AsManualDecorator
@@ -49,11 +49,11 @@ Benchmark.ips do |bm|
   forwardable      = AsForwardable.new('string')
   active_support   = AsActiveSupportDelegator.new('string')
 
-  bm.report 'no decoration' do
+  bm.report 'No decoration' do
     no_decoration.upcase
   end
 
-  bm.report 'manual decorator' do
+  bm.report 'Manual decorator' do
     manual_decorator.upcase
   end
 

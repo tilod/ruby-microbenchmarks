@@ -1,18 +1,17 @@
 require 'benchmark/ips'
 
+puts <<-DOC
+
+IF vs. EXCEPTION
+
+DOC
+
 ExceptionToRescue = Class.new(StandardError)
 
 Benchmark.ips do |bm|
-  bm.report 'with `if`' do
+  bm.report 'With `if`' do
     1.upto(100) do |number|
-      check_condition =
-          if number.odd?
-            :odd
-          else
-            :even
-          end
-
-      if check_condition == :odd
+      if number.odd?
         1 + 1
       else
         2 + 2
@@ -20,7 +19,7 @@ Benchmark.ips do |bm|
     end
   end
 
-  bm.report 'with exception' do
+  bm.report 'With exception' do
     1.upto(100) do |number|
       begin
         raise ExceptionToRescue if number.odd?

@@ -2,31 +2,35 @@ require 'active_model'
 require 'benchmark/ips'
 require 'faker'
 require 'reform'
+require 'reform/form/active_model/validations'
+
+Reform::Form.class_eval do
+  include Reform::Form::ActiveModel::Validations
+end
 
 
-puts %q{
-Reform Performance
-==================
+puts <<-DOC
+
+REFORM PERFORMANCE
 
 (1) ActiveModel:
     Instantiate ActiveModel with params and call #valid?.
 
-(2) Reform with assignment and #valid?
+(2) Reform w/ #valid?
     Instantiate Reform form and assign attributes, then call #valid?.
 
-(3) Reform with #validate:
+(3) Reform w/ #validate:
     Instantiate Reform form and use #validate to assign and validate attributes.
 
-
-}
+DOC
 
 
 def params
   {
     name:    [Faker::Name.name, nil][rand(1)],
     owner:   [Faker::Name.name, nil][rand(1)],
-    status:  %(start working end wrong also_wrong)[rand(5)],
-    members: [rand(100), "wrong"][rand(1)]
+    status:  %w(start working end wrong also_wrong)[rand(5)],
+    members: [rand(100), 'wrong'][rand(1)]
   }
 end
 
@@ -59,12 +63,12 @@ end
 
 
 Benchmark.ips do |bm|
-  bm.report "(1)" do
+  bm.report 'ActiveModel' do
     model = Project.new(params())
     model.valid?
   end
 
-  bm.report "(2)" do
+  bm.report 'Reform w/ #valid?' do
     model  = ProjectStruct.new
     form   = ProjectForm.new(model)
     params = params()
@@ -77,7 +81,7 @@ Benchmark.ips do |bm|
     form.valid?
   end
 
-  bm.report "(3)" do
+  bm.report 'Reform w/ #validate' do
     model = ProjectStruct.new
     form  = ProjectForm.new(model)
 

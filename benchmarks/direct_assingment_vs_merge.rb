@@ -1,61 +1,62 @@
 require 'benchmark/ips'
 
 
-puts %{
-Direct Assignment vs. Merge
-===========================
+puts <<-DOC
+
+DIRECT ASSIGNMENT vs. MERGE
 
 Assigning values in a Hash by direct assignment (Hash#[]=) vs. Hash#merge and
-Hash#merge!. Values are taken from another hash which is prebuild or newly
+Hash#merge!. Values are taken from another hash which is pre-build or newly
 created when passed.
 
-[]=, no hash:
-  Direct assignment, assigning 1000 elements, no hash where the values are
-  copied from. It can't be faster than this.
+( 1) []=, no hash:
+     Direct assignment, assigning 1000 elements, no hash where the values are
+     copied from. It can't be faster than this.
 
-[]=, 1000x1, pre:
-  Direct assignment, assigning 1000 elements, copying values from prebuild hash.
+( 2) []=, 1000x1, pre:
+     Direct assignment, assigning 1000 elements, copying values from pre-build
+     hash.
 
-merge, 1000x1, pre:
-  Hash#merge, merging 1000 hashes with 1 element each, using prebuild hash.
+( 3) merge, 1000x1, pre:
+     Hash#merge, merging 1000 hashes with 1 element each, using pre-build hash.
 
-merge, 1000x1, new:
-  Hash#merge, merging 1000 hashes with 1 element each, building new hash.
+( 4) merge, 1000x1, new:
+     Hash#merge, merging 1000 hashes with 1 element each, building new hash.
 
-merge!, 1000x1, pre:
-  Hash#merge!, merging 1000 hashes with 1 element each, using prebuild hash.
+( 5) merge!, 1000x1, pre:
+     Hash#merge!, merging 1000 hashes with 1 element each, using pre-build hash.
 
-merge!, 1000x1, new:
-  Hash#merge!, merging 1000 hashes with 1 element each, building new hash.
+( 6) merge!, 1000x1, new:
+     Hash#merge!, merging 1000 hashes with 1 element each, building new hash.
 
-[]=, 100x10, pre:
-  Direct assignment, copying the values over from 100 prebuild hashes with 10
-  elements each.
+( 7) []=, 100x10, pre:
+     Direct assignment, copying the values over from 100 pre-build hashes with
+     10 elements each.
 
-merge, 100x10, pre:
-  Hash#merge, merging 100 hashes with 10 elements each, using prebuild hash.
+( 8) merge, 100x10, pre:
+     Hash#merge, merging 100 hashes with 10 elements each, using pre-build hash.
 
-merge, 100x10, new:
-  Hash#merge, merging 100 hashes with 10 elements each, building a new hash.
+( 9) merge, 100x10, new:
+     Hash#merge, merging 100 hashes with 10 elements each, building a new hash.
 
-merge!, 100x10, pre:
-  Hash#merge!, merging 100 hashes with 10 elements each, using prebuild hash.
+(10) merge!, 100x10, pre:
+     Hash#merge!, merging 100 hashes with 10 elements each, using pre-build
+     hash.
 
-merge!, 100x10, new:
-  Hash#merge!, merging 100 hashes with 10 elements each, building a new hash.
+(11) merge!, 100x10, new:
+     Hash#merge!, merging 100 hashes with 10 elements each, building a new hash.
 
-[]=, 10x100, pre:
-  Direct assignment, copying the values over from 10 prebuild hashes with 100
-  elements each.
+(12) []=, 10x100, pre:
+     Direct assignment, copying the values over from 10 pre-build hashes with
+     100 elements each.
 
-merge, 10x100, pre:
-  Hash#merge, merging 10 hashes with 100 elements each, using prebuild hash.
+(13) merge, 10x100, pre:
+     Hash#merge, merging 10 hashes with 100 elements each, using pre-build hash.
 
-merge, 10x100, new:
-  Hash#merge!, merging 10 hashes with 100 elements each, building a new hash.
+(14) merge, 10x100, new:
+     Hash#merge!, merging 10 hashes with 100 elements each, building a new hash.
 
-
-}
+DOC
 
 
 def useless_hash(entries_count)

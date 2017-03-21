@@ -1,6 +1,13 @@
 require 'benchmark/ips'
 require 'memoist'
 
+puts <<-DOC
+
+MEMOIST vs. OR-EQUALS
+
+DOC
+
+
 class WithMemoist
   extend Memoist
 
@@ -32,14 +39,14 @@ class WithoutMemoist
 end
 
 Benchmark.ips do |bm|
-  bm.report 'with memoist    ( 1 call )' do
+  bm.report 'memoist     (1 call)' do
     instance = WithMemoist.new
     instance.a
     instance.b
     instance.c
   end
 
-  bm.report 'with memoist    ( 3 calls)' do
+  bm.report 'memoist    (3 calls)' do
     instance = WithMemoist.new
     3.times do
       instance.a
@@ -48,7 +55,7 @@ Benchmark.ips do |bm|
     end
   end
 
-  bm.report 'with memoist    (10 calls)' do
+  bm.report 'memoist   (10 calls)' do
     instance = WithMemoist.new
     10.times do
       instance.a
@@ -57,14 +64,14 @@ Benchmark.ips do |bm|
     end
   end
 
-  bm.report 'without memoist ( 1 call )' do
+  bm.report 'or-equals   (1 call)' do
     instance = WithoutMemoist.new
     instance.a
     instance.b
     instance.c
   end
 
-  bm.report 'without memoist ( 3 calls)' do
+  bm.report 'or-equals  (3 calls)' do
     instance = WithoutMemoist.new
     3.times do
       instance.a
@@ -73,7 +80,7 @@ Benchmark.ips do |bm|
     end
   end
 
-  bm.report 'without memoist (10 calls)' do
+  bm.report 'or-equals (10 calls)' do
     instance = WithoutMemoist.new
     10.times do
       instance.a

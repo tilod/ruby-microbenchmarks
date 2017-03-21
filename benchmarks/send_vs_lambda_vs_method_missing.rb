@@ -1,8 +1,8 @@
 require 'benchmark/ips'
 
-puts %q{
-#send vs. lambda vs. #method_missing
-====================================
+puts <<-DOC
+
+SEND vs. LAMBDA vs. METHOD_MISSING
 
 Calling methods in a class.
 
@@ -38,8 +38,7 @@ Calling methods in a class.
 (9) no method defined, method_missing called:
     Calling a missing method, functionality is implemented in method_missing
 
-
-}
+DOC
 
 
 class UselessClass
@@ -51,7 +50,7 @@ class UselessClass
   def useless_method(number)
     number * 2
   end
-  
+
   define_method :useless_generated_method do |number|
     number * 2
   end
@@ -63,9 +62,12 @@ class UselessClass
       super
     end
   end
+
+  def respond_to_missing?(method, include_private = false)
+    method == :useless_missing_method
+  end
 end
 useless_instance = UselessClass.new
-
 
 Benchmark.ips do |bm|
   bm.report '(1)' do

@@ -1,33 +1,32 @@
 require 'benchmark/ips'
 
 
-puts %Q{
-Proxy vs. Concern vs. DCI
-=========================
+puts <<-DOC
+
+SERVICE OBJECT vs. CONCERN vs. DCI
 
 Call methods in classes composed by using the proxy/decorator pattern,
 module mixins (Concerns) or DCI.
 
-direct call:
-  Call method directly. It can't be faster than this.
+(1) Direct call:
+    Call method directly. It can't be faster than this.
 
-call from method:
-  Call method from other method in same class.
+(2) Call from method:
+    Call method from other method in same class.
 
-proxy:
-  Proxy Pattern. Use Composition and call method from method in other object.
-  Traditional object oriented approach.
+(3) Service Object:
+    Use Composition and call method from method in other object. Traditional
+    object oriented approach.
 
-concern:
-  Concern as used in Rails. Include module in class and call method from mixed
-  in method in module.
+(4) Concern:
+    Concern as used in Rails. Include module in class and call method from mixed
+    in method in module.
 
-dci:
-  Data, Context, Interaction. Extend an instance with a module and call
-  method from the mixed in method in module.
+(5) DCI:
+    Data, Context, Interaction. Extend an instance with a module and call
+    method from the mixed in method in module.
 
-
-}
+DOC
 
 
 module DirectCall
@@ -104,23 +103,23 @@ end
 
 
 Benchmark.ips do |bm|
-  bm.report "direct call" do
+  bm.report 'Direct call' do
     DirectCall::Example.new.do_something
   end
 
-  bm.report "call from method" do
+  bm.report 'Call from method' do
     CallFromMethod::Example.new.call_do_something
   end
 
-  bm.report "proxy" do
+  bm.report 'Service Object' do
     Proxy::ExampleProxy.new(Proxy::Example.new).call_do_something
   end
 
-  bm.report "concern" do
+  bm.report 'Concern' do
     Concern::Example.new.call_do_something
   end
 
-  bm.report "dci" do
+  bm.report 'DCI' do
     DCI::Example.new.extend(DCI::ExampleDCIModule).call_do_something
   end
 end

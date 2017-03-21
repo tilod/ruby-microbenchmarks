@@ -1,7 +1,27 @@
 require 'benchmark/ips'
 
+puts <<-DOC
 
-# Speed of the method lookup in Ruby for deep ancestor trees
+METHOD LOOKUP SPEED
+
+Speed of the method lookup in Ruby for deep ancestor trees
+
+(1) One class:
+    Define all 1000 methods in one class and call five of them.
+
+(2) 10 deep:
+    Define 10 modules with 100 methods each and include them in the class. Call
+    five methods, equally distributed in the depth of the ancestor tree.
+
+(3) 100 deep:
+    Define 100 modules with 10 methods each and include them in the class. Call
+    five methods, equally distributed in the depth of the ancestor tree.
+
+(4) 1000 deep:
+    Define 1000 modules with one method each and include them in the class. Call
+    five methods, equally distributed in the depth of the ancestor tree.
+
+DOC
 
 
 class OneClass
@@ -59,29 +79,18 @@ end
 
 
 Benchmark.ips do |bm|
-  # Define all 1000 methods in one class and call five of them.
-  #
-  bm.report 'one class' do
+  bm.report 'One class' do
     call_methods(OneClass.new)
   end
-  
-  # Define 10 modules with 100 methods each and include them in the class. Call
-  # five methods, equally distributed in the depth of the ancestor tree.
-  #
+
   bm.report('10 deep') do
     call_methods(Deep10.new)
   end
 
-  # Define 100 modules with 10 methods each and include them in the class. Call
-  # five methods, equally distributed in the depth of the ancestor tree.
-  #
   bm.report('100 deep') do
     call_methods(Deep100.new)
   end
 
-  # Define 1000 modules with one method each and include them in the class. Call
-  # five methods, equally distributed in the depth of the ancestor tree.
-  #
   bm.report('1000 deep') do
     call_methods(Deep1000.new)
   end

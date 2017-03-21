@@ -1,5 +1,12 @@
 require 'benchmark/ips'
 
+puts <<-DOC
+
+SPLAT
+
+DOC
+
+
 class ClassWithSplat
   def call(*args)
     add(*args)
@@ -21,14 +28,14 @@ class ClassWithExplicitArguments
 end
 
 Benchmark.ips do |bm|
-  classWithSplat             = ClassWithSplat.new
-  classWithExplicitArguments = ClassWithExplicitArguments.new
+  class_with_splat              = ClassWithSplat.new
+  class_with_explicit_arguments = ClassWithExplicitArguments.new
 
-  bm.report 'using splat' do
-    classWithSplat.(1, 2)
+  bm.report 'Explicit arguments' do
+    class_with_explicit_arguments.call(1, 2)
   end
 
-  bm.report 'explicit arguments' do
-    classWithExplicitArguments.(1, 2)
+  bm.report 'Splat' do
+    class_with_splat.call(1, 2)
   end
 end

@@ -4,23 +4,21 @@ puts <<-DOC
 
 KEYWORDS ARGUMENTS
 
-(1) no kw args:
-  Defining the method without keyword arguments.
+(1) No KW args:
+    Defining the method without keyword arguments.
 
-(2) kw args I:
-  Defining the method with keyword arguments and defaults, using the default
-  values when calling the method.
+(2) KW args (defaults):
+    Defining the method with keyword arguments and defaults, using the default
+    values when calling the method.
 
-(3) kw args II:
-  Defining the method with keyword arguments and defaults, pass values when
-  calling the method.
+(3) KW args (w/ values):
+    Defining the method with keyword arguments and defaults, pass values when
+    calling the method.
 
-(4) kw splat:
-  Defining the method with a keyword splat (`**opts`).
-
+(4) KW splat:
+    Defining the method with a keyword splat (`**opts`).
 
 DOC
-
 
 class WithoutKeywordArgs
   def call(one, two, three)
@@ -45,24 +43,24 @@ end
 GC.disable
 
 Benchmark.ips do |bm|
-  withoutKeywordArgs = WithoutKeywordArgs.new
-  withKeywordArgs    = WithKeywordArgs.new
-  withKeywordSplat   = WithKeywordSplat.new
+  without_keyword_args = WithoutKeywordArgs.new
+  with_keyword_args    = WithKeywordArgs.new
+  with_keyword_splat   = WithKeywordSplat.new
 
-  bm.report '(1) no kw args' do
-    withoutKeywordArgs.(1, 2, 3)
+  bm.report 'No KW args' do
+    without_keyword_args.call(1, 2, 3)
   end
 
-  bm.report '(2) kw args I ' do
-    withKeywordArgs.(1)
+  bm.report 'KW args (defaults)' do
+    with_keyword_args.call(1)
   end
 
-  bm.report '(3) kw args II' do
-    withKeywordArgs.(1, two: 2, three: 3)
+  bm.report 'KW args (w/ values)' do
+    with_keyword_args.call(1, two: 2, three: 3)
   end
 
-  bm.report '(4) kw splat  ' do
-    withKeywordSplat.(1, two: 2, three: 3)
+  bm.report 'KW splat' do
+    with_keyword_splat.call(1, two: 2, three: 3)
   end
 end
 
