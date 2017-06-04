@@ -2,12 +2,14 @@ GEM
   remote: https://rubygems.org/
   specs:
     benchmark-ips (2.7.2)
+    memoist (0.15.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   benchmark-ips
+  memoist
 
 BUNDLED WITH
-   1.14.6
+   1.15.1

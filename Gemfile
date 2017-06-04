@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-# Gemfile only defines `benchmark-ips` (obviously ...). Some benchmarks need
-# additional gems.
-
 gem 'benchmark-ips'
+
+# Gems for individual benchmarks
+# feel free to remove when a certain benchmark should not be run
+
+gem 'memoist'
