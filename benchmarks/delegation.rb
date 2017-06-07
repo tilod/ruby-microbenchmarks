@@ -3,12 +3,10 @@ require 'delegate'
 require 'forwardable'
 require 'active_support/core_ext/module/delegation'
 
-puts <<-DOC
-
-DELEGATION
+puts <<~DOC
+  DELEGATION
 
 DOC
-
 
 class AsManualDecorator
   def initialize(string)
@@ -40,7 +38,6 @@ class AsActiveSupportDelegator
 
   delegate :upcase, to: :@string
 end
-
 
 Benchmark.ips do |bm|
   no_decoration    = 'string'
