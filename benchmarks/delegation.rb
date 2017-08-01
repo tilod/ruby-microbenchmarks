@@ -13,8 +13,8 @@ class AsManualDecorator
     @string = string
   end
 
-  def upcase
-    @string.upcase
+  def size
+    @string.size
   end
 end
 
@@ -28,7 +28,7 @@ class AsForwardable
     @string = string
   end
 
-  def_delegator :@string, :upcase
+  def_delegator :@string, :size
 end
 
 class AsActiveSupportDelegator
@@ -36,7 +36,7 @@ class AsActiveSupportDelegator
     @string = string
   end
 
-  delegate :upcase, to: :@string
+  delegate :size, to: :@string
 end
 
 Benchmark.ips do |bm|
@@ -47,22 +47,22 @@ Benchmark.ips do |bm|
   active_support   = AsActiveSupportDelegator.new('string')
 
   bm.report 'No decoration' do
-    no_decoration.upcase
+    no_decoration.size
   end
 
   bm.report 'Manual decorator' do
-    manual_decorator.upcase
+    manual_decorator.size
   end
 
   bm.report 'SimpleDelegator' do
-    simple_delegator.upcase
+    simple_delegator.size
   end
 
   bm.report 'Forwardable' do
-    forwardable.upcase
+    forwardable.size
   end
 
   bm.report 'ActiveSupport' do
-    active_support.upcase
+    active_support.size
   end
 end
