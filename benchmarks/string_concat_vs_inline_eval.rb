@@ -2,7 +2,7 @@ require 'benchmark/ips'
 
 
 puts <<-'DOC'
-STRING CONCATANATION vs. INLINE EVAL
+STRING CONCATANATION vs. TEMPLATE STRING vs. INLINE EVAL
 
 (1) Concat with `+`:
     Concating the strings with String#+ which creates a new string every time it
@@ -16,8 +16,16 @@ STRING CONCATANATION vs. INLINE EVAL
     Appending tho the original string using `String#+=`. This creates a new
     string every time it is called and replaces the old string with the result.
 
-(4) Inline eval:
-  Using inline evaluation `#{}` to build up the string.
+(4) Template string with array:
+    Create a string with `%d` and use `%` with an array to substitute the
+    placeholders.
+
+(5) Template string with hash:
+    Create a string with `%<name>d` and use `%` with a hash to substitute the
+    placeholders. 
+
+(6) Inline eval:
+    Using inline evaluation `#{}` to build up the string.
 
 DOC
 
@@ -55,6 +63,20 @@ Benchmark.ips do |bm|
     string += (4 + 4).to_s
     string += 'fifth'
     string += (5 + 5).to_s
+  end
+
+  bm.report 'template with array' do
+    "first%dsecond%dthird%dfourth%dfifth%d" % [1 + 1, 2 + 2, 3 + 3, 4 + 4, 5 + 5]
+  end
+
+  bm.report 'template with hash' do
+    "first%<first>dsecond%<second>dthird%<third>dforth%<forth>dfifth%<fifth>d" % {
+      first: 1 + 1,
+      second: 2 + 2,
+      third: 3 + 3,
+      forth: 4 + 4,
+      fifth: 5 + 5,
+    }
   end
 
   bm.report 'inline eval' do
